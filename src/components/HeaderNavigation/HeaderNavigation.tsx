@@ -2,7 +2,6 @@ import { ISetModalActive } from "interfaces/ISetModalActive";
 import React from "react";
 import styles from "./HeaderNavigation.module.css";
 
-
 export const HeaderNavigation: React.FC<ISetModalActive> = ({
   setModalActive,
   setCurrentForm,

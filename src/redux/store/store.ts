@@ -1,8 +1,10 @@
 import { applyMiddleware, createStore } from "redux";
-import { errorMessageReducer} from "redux/reducers/errorMessageReducer";
+import rootReducer from "redux/reducers/rootReducer";
 import createSagaMiddleware from "redux-saga";
 import { userAuth } from "redux/sagas/saga";
 
+
 const sagaMiddleware = createSagaMiddleware();
-export const store = createStore(errorMessageReducer, applyMiddleware(sagaMiddleware));
+export const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
+
 sagaMiddleware.run(userAuth);

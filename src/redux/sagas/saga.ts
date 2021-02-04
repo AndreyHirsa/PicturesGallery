@@ -5,9 +5,12 @@ import {
   logInSuccess,
   signUpFailure,
   logInFailure,
+  SIGN_OUT,
+  signOutSuccess,
 } from "redux/actions/actions";
 import { takeEvery, call, put } from "redux-saga/effects";
 import { rsf } from "services/firebaseService";
+
 
 function* createUserSaga(data: any) {
   try {
@@ -17,7 +20,6 @@ function* createUserSaga(data: any) {
       data.payload.password
     );
     yield put(signUpSuccess(user));
-    yield console.log(user);
   } catch (error) {
     yield put(signUpFailure(error.message));
   }
@@ -36,7 +38,17 @@ function* loginSaga(data: any) {
   }
 }
 
+function* signOutSaga() {
+  try {
+    const data = yield call(rsf.auth.signOut);
+    yield put(signOutSuccess(data));
+  } catch (error) {
+    yield put(signUpFailure(error.message));
+  }
+}
+
 export function* userAuth() {
   yield takeEvery(SIGN_UP, createUserSaga);
   yield takeEvery(LOG_IN, loginSaga);
+  yield takeEvery(SIGN_OUT, signOutSaga);
 }

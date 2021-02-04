@@ -5,9 +5,9 @@ import {
 } from "redux/actions/actions";
 
 
-export const userState:string = ""
+export const errorMessage:string = ""
 
-export function errorMessageReducer(state = userState, action: ActionTypes): any {
+export function errorMessageReducer(state = errorMessage, action: ActionTypes): any {
   switch (action.type) {
     case SIGN_UP_FAILURE:
       return action.payload.message;

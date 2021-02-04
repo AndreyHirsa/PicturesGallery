@@ -63,12 +63,10 @@ export const signUp = (email: string, password: string): ActionTypes => {
 };
 
 
-export const signOutSuccess=(data:any)=>{
+export const signOutSuccess=()=>{
   return{
     type:SIGN_OUT_SUCCESS,
-    payload:{
-      data
-    }
+    payload:null
   }
 }   
 
@@ -94,9 +92,7 @@ export const signOut=()=>{
 
 export interface ISignOutSuccess{
   type: typeof SIGN_OUT_SUCCESS;
-  payload: {
-    data: any;
-  };
+  payload:null;
 }
 
 export interface ISignOutFailure{

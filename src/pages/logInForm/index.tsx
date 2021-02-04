@@ -5,10 +5,11 @@ import { logIn } from "redux/actions/actions";
 import CloseIcon from "@material-ui/icons/Close";
 import styles from "./style.module.css";
 import { Link } from "react-router-dom";
-
-
+import {Redirect} from "react-router-dom";
+import React from 'react'
 
 export const LogInForm: React.FC = () => {
+  let user = useSelector((state: any) => state.loginReducer);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -25,8 +26,11 @@ export const LogInForm: React.FC = () => {
   }
 
   function logInUser(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-    e.preventDefault();
-    dispatch(logIn(email, password));
+    dispatch(logIn(email, password))
+  }
+
+  if(user){
+    return <Redirect push to="/"/>
   }
 
   return (
@@ -37,7 +41,7 @@ export const LogInForm: React.FC = () => {
             <CloseIcon className={styles.closeIcon} />
           </button>
         </Link>
-        <TextField
+        <TextField required={true}
           className={styles.formInput}
           label="Email"
           variant="outlined"
@@ -45,7 +49,7 @@ export const LogInForm: React.FC = () => {
           onChange={emailHandler}
           type="email"
         />
-        <TextField
+        <TextField required={true}
           label="Password"
           variant="outlined"
           value={password}

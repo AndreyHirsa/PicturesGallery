@@ -41,7 +41,7 @@ function* loginSaga(data: any) {
 function* signOutSaga() {
   try {
     const data = yield call(rsf.auth.signOut);
-    yield put(signOutSuccess(data));
+    yield put(signOutSuccess());
   } catch (error) {
     yield put(signUpFailure(error.message));
   }

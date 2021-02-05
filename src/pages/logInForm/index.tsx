@@ -1,19 +1,19 @@
-import { Button,TextField } from "@material-ui/core";
+import { Button, TextField } from "@material-ui/core";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { logIn } from "redux/actions/actions";
 import CloseIcon from "@material-ui/icons/Close";
 import styles from "./style.module.css";
 import { Link } from "react-router-dom";
-import {Redirect} from "react-router-dom";
-import React from 'react'
+import { Redirect } from "react-router-dom";
+import React from "react";
+import { logIn } from "redux/actions/logInActions";
 
 export const LogInForm: React.FC = () => {
-  let user = useSelector((state: any) => state.loginReducer);
+  const user = useSelector((state: any) => state.loginReducer);
+  const message = useSelector((state: any) => state.errorMessageReducer);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const message = useSelector((state:any)=>state.errorMessageReducer)
 
   const dispatch = useDispatch();
 
@@ -26,11 +26,11 @@ export const LogInForm: React.FC = () => {
   }
 
   function logInUser(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-    dispatch(logIn(email, password))
+    dispatch(logIn(email, password));
   }
 
-  if(user){
-    return <Redirect push to="/"/>
+  if (user) {
+    return <Redirect push to="/" />;
   }
 
   return (
@@ -41,7 +41,8 @@ export const LogInForm: React.FC = () => {
             <CloseIcon className={styles.closeIcon} />
           </button>
         </Link>
-        <TextField required={true}
+        <TextField
+          required={true}
           className={styles.formInput}
           label="Email"
           variant="outlined"
@@ -49,7 +50,8 @@ export const LogInForm: React.FC = () => {
           onChange={emailHandler}
           type="email"
         />
-        <TextField required={true}
+        <TextField
+          required={true}
           label="Password"
           variant="outlined"
           value={password}

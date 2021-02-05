@@ -1,35 +1,50 @@
 import { AppBar, Button, Toolbar } from "@material-ui/core";
-import React, {useState} from "react";
+import firebase from "firebase";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { signOut} from "redux/actions/actions";
-
-
+import { resetErrorMessage } from "redux/actions/errorMessageActions";
+import { signOut } from "redux/actions/signOutActions";
 
 export const HeaderNavigation = () => {
-  let user = useSelector((state: any) => state.loginReducer);
+  let user = useSelector((state:any) => state.loginReducer);
 
-  const dispatch= useDispatch()
+  const dispatch = useDispatch();
 
-  const signout=()=>{
-    dispatch(signOut())
-  }
+  const [userState, setUserState] = useState(user);
 
-  console.log(!!user)
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged((user) => {
+      setUserState(user);
+    });
+  });
+
+  const signout = () => {
+    dispatch(signOut());
+  };
+
+  const resetMessage = () => {
+    dispatch(resetErrorMessage());
+  };
 
   return (
     <AppBar position="static">
-      {user? (
+      {userState ? (
         <Toolbar>
-          <Button onClick={signout}>Log Out</Button>
+          <Link to="/">
+            <Button onClick={signout}>Log Out</Button>
+          </Link>
+          <Link to="/start_drawing">
+            <Button>Start drawing</Button>
+          </Link>
         </Toolbar>
       ) : (
         <Toolbar>
           <Link to="/login">
-            <Button>Log in</Button>
+            <Button onClick={resetMessage}>Log in</Button>
           </Link>
           <Link to="/signup">
-            <Button>Sign Up</Button>
+            <Button onClick={resetMessage}>Sign Up</Button>
           </Link>
         </Toolbar>
       )}

@@ -1,25 +1,17 @@
-import {
-  LOG_IN,
-  SIGN_UP,
-  signUpSuccess,
-  logInSuccess,
-  signUpFailure,
-  logInFailure,
-  SIGN_OUT,
-  signOutSuccess,
-} from "redux/actions/actions";
 import { takeEvery, call, put } from "redux-saga/effects";
+import { LOG_IN, SIGN_OUT, SIGN_UP } from "redux/actions/constants";
+import { logInFailure, signUpFailure } from "redux/actions/errorMessageActions";
+import { logInSuccess } from "redux/actions/logInActions";
+import { signOutFailure } from "redux/actions/signOutActions";
 import { rsf } from "services/firebaseService";
-
 
 function* createUserSaga(data: any) {
   try {
-    const user = yield call(
+    yield call(
       rsf.auth.createUserWithEmailAndPassword,
       data.payload.email,
       data.payload.password
     );
-    yield put(signUpSuccess(user));
   } catch (error) {
     yield put(signUpFailure(error.message));
   }
@@ -40,10 +32,9 @@ function* loginSaga(data: any) {
 
 function* signOutSaga() {
   try {
-    const data = yield call(rsf.auth.signOut);
-    yield put(signOutSuccess());
+    yield call(rsf.auth.signOut);
   } catch (error) {
-    yield put(signUpFailure(error.message));
+    yield put(signOutFailure(error.message));
   }
 }
 

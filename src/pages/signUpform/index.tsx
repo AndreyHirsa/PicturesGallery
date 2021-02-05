@@ -1,16 +1,16 @@
 import { Button, TextField } from "@material-ui/core";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { signUp } from "redux/actions/actions";
 import CloseIcon from "@material-ui/icons/Close";
 import styles from "./style.module.css";
 import { Link } from "react-router-dom";
+import { signUp } from "redux/actions/signUpActions";
 
 export const SignUpForm: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const message = useSelector((state:any) => state.errorMessageReducer);
+  const message = useSelector((state: any) => state.errorMessageReducer);
 
   const dispatch = useDispatch();
 
@@ -23,7 +23,6 @@ export const SignUpForm: React.FC = () => {
   }
 
   function signUpUser(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-    console.log(message);
     e.preventDefault();
     dispatch(signUp(email, password));
   }

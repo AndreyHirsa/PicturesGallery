@@ -1,0 +1,12 @@
+export const SIGN_UP = "SIGN_UP";
+export const LOG_IN = "LOG_IN";
+export const SIGN_UP_SUCCESS = "SIGN_UP_SUCCESS";
+export const LOG_IN_SUCCESS = "LOG_IN_SUCCESS";
+export const SIGN_UP_FAILURE = "SIGN_UP_FAILURE";
+export const LOG_IN_FAILURE = "LOG_IN_FAILURE";
+export const SIGN_OUT_SUCCESS = "SIGN_OUT_SUCCESS";
+export const SIGN_OUT_FAILURE = "SIGN_OUT_FAILURE";
+export const SIGN_OUT = "SIGN_OUT";
+export const SET_USER_STATE = "SET_USER_STATE";
+export const UPDATE_USER_STATE = "UPDATE_USER_STATE";
+export const RESET_ERROR_MESSAGE="RESET_ERROR_MESSAGE"

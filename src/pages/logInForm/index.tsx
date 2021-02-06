@@ -6,7 +6,7 @@ import styles from "./style.module.css";
 import { Link } from "react-router-dom";
 import { Redirect } from "react-router-dom";
 import React from "react";
-import { logIn } from "redux/actions/logInActions";
+import { logIn } from "redux/actions/userStateActions";
 
 export const LogInForm: React.FC = () => {
   const user = useSelector((state: any) => state.loginReducer);

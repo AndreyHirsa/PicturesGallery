@@ -1,4 +1,4 @@
-import { LOG_IN, LOG_IN_SUCCESS } from "redux/actions/constants";
+import {LOG_IN, LOG_IN_SUCCESS, SIGN_OUT} from "redux/actions/constants";
 
 export interface ILogInSuccess {
   type: typeof LOG_IN_SUCCESS;
@@ -15,4 +15,10 @@ export interface ILogIn {
   };
 }
 
-export type LoginActionsType = ILogInSuccess | ILogIn;
+export interface ISignOut{
+  type:typeof SIGN_OUT
+  payload:null
+
+}
+
+export type UserStateActionsType = ILogInSuccess |  ISignOut;

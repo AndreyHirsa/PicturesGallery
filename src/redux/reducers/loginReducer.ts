@@ -1,13 +1,15 @@
-import { LoginActionsType } from "interfaces/ILogInActions";
-import { LOG_IN_SUCCESS } from "redux/actions/constants";
+import {LOG_IN_SUCCESS, SIGN_OUT} from "redux/actions/constants";
+import {UserStateActionsType} from "../../interfaces/IUserStateActions";
 
-export let userState: null | object = null;
+export let userState: any = null;
 
-export function loginReducer(state = userState, action: LoginActionsType) {
-  switch (action.type) {
-    case LOG_IN_SUCCESS:
-      return action.payload;
-    default:
-      return state;
-  }
+export function loginReducer(state = userState, action: UserStateActionsType ) {
+    switch (action.type) {
+        case LOG_IN_SUCCESS:
+            return action.payload;
+        case SIGN_OUT:
+            return action.payload
+        default:
+            return state;
+    }
 }

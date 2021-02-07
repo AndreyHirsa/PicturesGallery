@@ -1,10 +1,13 @@
-import {GET_IMAGES, PUT_IMAGES} from "../actions/constants";
+import {PUT_IMAGES} from "redux/actions/constants";
+import {ImagesActionsType} from "interfaces/IImagesActions";
 
-const imagesState:any=[]
-export const imagesReducer=(state=imagesState,action:any)=>{
-    switch (action.type){
+const imagesState: string[] = [];
+
+export const imagesReducer = (state = imagesState, action: ImagesActionsType) => {
+    switch (action.type) {
         case PUT_IMAGES:
-            return action.payload
-        default:return state
+            return action.payload;
+        default:
+            return state;
     }
 }

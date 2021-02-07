@@ -1,21 +1,23 @@
 import {combineReducers} from "redux";
 import {errorMessageReducer} from "./errorMessageReducer";
-import {loginReducer} from "./loginReducer";
 import {imagesReducer} from "./imagesReducer";
+import {userStateReducer} from "./userStateReducer";
 import {persistReducer} from "redux-persist";
+import {signUpReducer} from "./signUpReducer";
 import storage from "redux-persist/lib/storage";
 
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist: ["loginReducer"]
+    whitelist: ["userStateReducer"]
 }
 
 const rootReducer = combineReducers({
     errorMessageReducer,
-    loginReducer,
-    imagesReducer
+    userStateReducer,
+    imagesReducer,
+    signUpReducer
 });
 
 
-export const newReducer = persistReducer(persistConfig, rootReducer)
+export const persistedRootReducer = persistReducer(persistConfig, rootReducer)

@@ -12,6 +12,9 @@ code {
     monospace;
 }
 
+a{
+  text-decoration: none;
+}
 
 *{
   box-sizing: border-box;

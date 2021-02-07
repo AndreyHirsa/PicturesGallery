@@ -4,9 +4,9 @@
     grid-template-columns:repeat(auto-fill,300px);
     justify-content: center;
     grid-auto-rows: 200px;
-    width: 100vw;
+    width:100%;
     grid-gap: 20px;
-    height: 800px;
+    min-height: 300px;
 }
 
 .image{

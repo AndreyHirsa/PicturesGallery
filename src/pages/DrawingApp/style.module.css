@@ -7,7 +7,27 @@
 .drawingAppContainer{
     display: flex;
     width: 100vw;
-    height: 90vh;
+    height: 85vh;
     justify-content: center;
     align-items: center;
+}
+
+.options{
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    width: 70px;
+    height: 400px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+}
+
+button{
+    width: 100%;
+    height: fit-content;
+}
+
+.saveIcon{
+    color: #00c853;
 }

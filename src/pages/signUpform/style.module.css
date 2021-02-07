@@ -17,6 +17,10 @@
   transform: translate(-50%, -50%);
 }
 
+button{
+    width: 100%;
+}
+
 .close{
     cursor: pointer;
     border: none;
@@ -32,6 +36,12 @@
 
 .message{
     color: crimson;
+    font-size: 14px;
+    height: 20px;
+}
+
+.successMessage{
+    color: #00c853;
     font-size: 14px;
     height: 20px;
 }

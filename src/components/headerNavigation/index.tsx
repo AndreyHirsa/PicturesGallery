@@ -1,19 +1,13 @@
 import {AppBar, Button, Toolbar} from "@material-ui/core";
-import React, {useEffect} from "react";
+import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import {resetErrorMessage} from "redux/actions/errorMessageActions";
 import {signOut} from "redux/actions/userStateActions";
 
-
-
 export const HeaderNavigation: React.FC = () => {
 
-    let user = useSelector((state: any) => state.loginReducer)
-
-    useEffect(()=>{
-        console.log(user)
-    })
+    let user = useSelector((state: any) => state.userStateReducer)
 
     const dispatch = useDispatch();
 

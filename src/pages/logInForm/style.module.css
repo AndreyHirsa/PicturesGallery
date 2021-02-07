@@ -9,7 +9,11 @@
     padding:55px 10px 10px 10px;
     height: 270px;
   }
-  
+
+  button{
+  width: 100%;
+  }
+
   .formContainer{
     position: absolute;
     top: 50%;

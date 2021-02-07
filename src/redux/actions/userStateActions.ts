@@ -24,9 +24,9 @@ export const logIn = (email: string, password: string) => {
 };
 
 
-export const signOut=()=>{
-    return{
-        type:SIGN_OUT,
-        payload:null
+export const signOut = () => {
+    return {
+        type: SIGN_OUT,
+        payload: null
     }
 }

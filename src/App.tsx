@@ -1,23 +1,21 @@
-import {DrawingApp} from "pages/DrawingApp";
+import {DrawingApp} from "pages/drawingApp";
 import {LogInForm} from "pages/logInForm";
 import {SignUpForm} from "pages/signUpform";
-import React, {useEffect,useState} from "react";
+import React from "react";
 import {Route, Switch} from "react-router";
 import {HeaderNavigation} from "./components/headerNavigation";
-import {useSelector} from "react-redux";
-import {Gallery} from "./pages/Gallery/Gallery";
-
+import {Gallery} from "pages/gallery";
 
 const App: React.FC = () => {
 
     return (
-        <div className="App">
+        <div className='App'>
             <HeaderNavigation/>
             <Switch>
-                <Route exact path="/login" component={LogInForm}/>
-                <Route exact path="/signup" component={SignUpForm}/>
-                <Route exact path="/start_drawing" component={DrawingApp}/>
-                <Route exact path="/gallery" component={Gallery}/>
+                <Route exact path='/login' component={LogInForm}/>
+                <Route exact path='/signup' component={SignUpForm}/>
+                <Route exact path='/start_drawing' component={DrawingApp}/>
+                <Route exact path='/gallery' component={Gallery}/>
             </Switch>
         </div>
     );

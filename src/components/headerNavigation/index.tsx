@@ -1,14 +1,15 @@
-import {AppBar, Button, Toolbar} from "@material-ui/core";
-import React from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {Link} from "react-router-dom";
-import {resetErrorMessage} from "redux/actions/errorMessageActions";
-import {signOut} from "redux/actions/userStateActions";
+import React from 'react';
+import { AppBar, Button, Toolbar } from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { resetErrorMessage } from 'redux/actions/errorMessageActions';
+import { signOut } from 'redux/actions/userStateActions';
+import { userState } from 'redux/reducers/userStateReducer';
 
-export const HeaderNavigation: React.FC = () => {
-
-    let user = useSelector((state: any) => state.userStateReducer)
-
+export const HeaderNavigation = (): JSX.Element => {
+    const user = useSelector(
+        (state: typeof userState) => state?.userStateReducer
+    );
     const dispatch = useDispatch();
 
     const signOutFn = () => {
@@ -21,7 +22,7 @@ export const HeaderNavigation: React.FC = () => {
 
     return (
         <AppBar position="static">
-            {user ?
+            {user ? (
                 <Toolbar>
                     <Link to="/">
                         <Button onClick={signOutFn}>Log Out</Button>
@@ -33,7 +34,7 @@ export const HeaderNavigation: React.FC = () => {
                         <Button>Gallery</Button>
                     </Link>
                 </Toolbar>
-                :
+            ) : (
                 <Toolbar>
                     <Link to="/login">
                         <Button onClick={resetMessage}>Log in</Button>
@@ -42,7 +43,7 @@ export const HeaderNavigation: React.FC = () => {
                         <Button onClick={resetMessage}>Sign Up</Button>
                     </Link>
                 </Toolbar>
-            }
+            )}
         </AppBar>
     );
 };

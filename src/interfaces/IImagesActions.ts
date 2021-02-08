@@ -1,10 +1,12 @@
-import {PUT_IMAGES} from "redux/actions/constants";
+import { GET_IMAGES, PUT_IMAGES } from 'redux/actions/constants';
 
-export interface IPutImages {
-    type: typeof PUT_IMAGES
-    payload: {
-        data: string[]
-    }
+export interface IGetImages{
+  type:typeof GET_IMAGES
 }
 
-export type ImagesActionsType = IPutImages;
+export interface IPutImages {
+  type: typeof PUT_IMAGES;
+  payload: string[];
+}
+
+export type ImagesActionsType = IPutImages | IGetImages;

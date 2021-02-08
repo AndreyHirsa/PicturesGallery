@@ -1,21 +1,20 @@
-import {Button, TextField} from "@material-ui/core";
-import {useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import CloseIcon from "@material-ui/icons/Close";
-import styles from "./style.module.css";
-import {Link} from "react-router-dom";
-import {Redirect} from "react-router-dom";
-import React from "react";
-import {logIn} from "redux/actions/userStateActions";
+import { Button, TextField } from '@material-ui/core';
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import CloseIcon from '@material-ui/icons/Close';
+import { Link, Redirect } from 'react-router-dom';
+import { logIn } from 'redux/actions/userStateActions';
+import styles from './style.module.css';
+import { userState } from 'redux/reducers/userStateReducer';
+import { errorMessage } from 'redux/reducers/errorMessageReducer';
 
 export const LogInForm: React.FC = () => {
-
-    const user = useSelector((state: any) => state.userStateReducer);
-    const message = useSelector((state: any) => state.errorMessageReducer);
-
+    const user = useSelector(
+        (state: typeof userState) => state?.userStateReducer
+    );
+    const message = useSelector((state:any) => state?.errorMessageReducer);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
     const dispatch = useDispatch();
 
     function emailHandler(e: React.ChangeEvent<HTMLInputElement>) {
@@ -26,38 +25,38 @@ export const LogInForm: React.FC = () => {
         setPassword(e.target.value);
     }
 
-    function logInUser(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    function logInUser() {
         dispatch(logIn(email, password));
     }
 
     if (user) {
-        return <Redirect push to='/'/>;
+        return <Redirect push to="/" />;
     }
 
     return (
         <div className={styles.formContainer}>
             <form className={styles.form}>
-                <Link to='/'>
-                    <button type='button' className={styles.close}>
-                        <CloseIcon className={styles.closeIcon}/>
+                <Link to="/">
+                    <button type="button" className={styles.close}>
+                        <CloseIcon className={styles.closeIcon} />
                     </button>
                 </Link>
                 <TextField
-                    required={true}
+                    required
                     className={styles.formInput}
-                    label='Email'
-                    variant='outlined'
+                    label="Email"
+                    variant="outlined"
                     value={email}
                     onChange={emailHandler}
-                    type='email'
+                    type="email"
                 />
                 <TextField
-                    required={true}
-                    label='Password'
-                    variant='outlined'
+                    required
+                    label="Password"
+                    variant="outlined"
                     value={password}
                     onChange={passwordHandler}
-                    type='password'
+                    type="password"
                 />
                 <span className={styles.message}>{message}</span>
                 <Button onClick={logInUser}>Log in</Button>

@@ -1,22 +1,22 @@
 import React from 'react';
 import { AppBar, Button, Toolbar } from '@material-ui/core';
-import { useDispatch, useSelector } from 'react-redux';
+import {createSelectorHook, useDispatch} from 'react-redux';
 import { Link } from 'react-router-dom';
 import { resetErrorMessage } from 'redux/actions/errorMessageActions';
 import { signOut } from 'redux/actions/userStateActions';
-import { userState } from 'redux/reducers/userStateReducer';
+import {RootState} from "interfaces/RootStateType";
 
-export const HeaderNavigation = (): JSX.Element => {
-    const user = useSelector(
-        (state: typeof userState) => state?.userStateReducer
-    );
+export const HeaderNavigation:React.FC = (): JSX.Element => {
+
+    const useSelector = createSelectorHook<RootState>()
+    const user = useSelector(state => state?.userStateReducer);
     const dispatch = useDispatch();
 
-    const signOutFn = () => {
+    const signOutFn = ():void => {
         dispatch(signOut());
     };
 
-    const resetMessage = () => {
+    const resetMessage = ():void => {
         dispatch(resetErrorMessage());
     };
 

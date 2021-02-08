@@ -1,31 +1,31 @@
 import { Button, TextField } from '@material-ui/core';
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import {createSelectorHook, useDispatch, useSelector} from 'react-redux';
 import CloseIcon from '@material-ui/icons/Close';
 import { Link, Redirect } from 'react-router-dom';
 import { logIn } from 'redux/actions/userStateActions';
 import styles from './style.module.css';
-import { userState } from 'redux/reducers/userStateReducer';
-import { errorMessage } from 'redux/reducers/errorMessageReducer';
+import {RootState} from "interfaces/RootStateType";
 
-export const LogInForm: React.FC = () => {
-    const user = useSelector(
-        (state: typeof userState) => state?.userStateReducer
-    );
-    const message = useSelector((state:any) => state?.errorMessageReducer);
+export const LogInForm: React.FC = ():JSX.Element => {
+
+    const useSelector = createSelectorHook<RootState>()
+    const user = useSelector(state => state?.userStateReducer);
+    const message = useSelector(state => state.errorMessageReducer);
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const dispatch = useDispatch();
 
-    function emailHandler(e: React.ChangeEvent<HTMLInputElement>) {
+    function emailHandler(e: React.ChangeEvent<HTMLInputElement>):void {
         setEmail(e.target.value);
     }
 
-    function passwordHandler(e: React.ChangeEvent<HTMLInputElement>) {
+    function passwordHandler(e: React.ChangeEvent<HTMLInputElement>):void {
         setPassword(e.target.value);
     }
 
-    function logInUser() {
+    function logInUser():void {
         dispatch(logIn(email, password));
     }
 

@@ -1,10 +1,11 @@
 import React from 'react';
 import { Route, Switch } from 'react-router';
-import { DrawingApp } from 'pages/DrawingApp';
+import { DrawingApp } from 'pages/drawingApp';
 import { LogInForm } from 'pages/logInForm';
 import { SignUpForm } from 'pages/signUpform';
-import { Gallery } from 'pages/Gallery';
+import { Gallery } from 'pages/gallery';
 import { HeaderNavigation } from './components/headerNavigation';
+import {PrivateRoute} from "./PrivateRoute";
 
 const App: React.FC = () => (
     <div className="App">
@@ -12,8 +13,8 @@ const App: React.FC = () => (
         <Switch>
             <Route exact path="/login" component={LogInForm} />
             <Route exact path="/signup" component={SignUpForm} />
-            <Route exact path="/start_drawing" component={DrawingApp} />
-            <Route exact path="/gallery" component={Gallery} />
+            <PrivateRoute exact path="/start_drawing" component={DrawingApp} />
+            <PrivateRoute exact path="/gallery" component={Gallery} />
         </Switch>
     </div>
 );

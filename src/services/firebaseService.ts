@@ -1,5 +1,4 @@
 import firebase from 'firebase';
-import ReduxSagaFirebase from 'redux-saga-firebase';
 
 export const firebaseConfig = {
     apiKey: 'AIzaSyCAstGMtg6eF1Pz_csvP8Mn-qMR5cZ670c',
@@ -11,5 +10,18 @@ export const firebaseConfig = {
     appId: '1:24096359356:web:6ea8a883c6e33e5f4521b9',
 };
 
-export const firebaseApp = firebase.initializeApp(firebaseConfig);
-export const rsf = new ReduxSagaFirebase(firebaseApp);
+export const firebaseService={
+    saveImage:(data:string):void=>{
+        try {
+            firebase
+                .database()
+                .ref()
+                .child('pictures/')
+                .child(`${new Date().getTime()}`)
+                .set(data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+

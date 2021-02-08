@@ -2,18 +2,16 @@ import { Button } from '@material-ui/core';
 import React, { useEffect, useRef, useState } from 'react';
 import firebase from 'firebase';
 import SaveIcon from '@material-ui/icons/Save';
-import { useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 import styles from './style.module.css';
-import { userState } from 'redux/reducers/userStateReducer';
+import {firebaseService} from "../../services/firebaseService";
+
 
 export const DrawingApp:React.FC = ():JSX.Element => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
     const contextRef = useRef<CanvasRenderingContext2D | null>(null);
     const [isDrawing, setIsDrawing] = useState(false);
-    const user = useSelector((state: typeof userState) => state?.userStateReducer);
 
-    useEffect(() => {
+    useEffect(():void => {
         if (canvasRef.current) {
             const canvas = canvasRef.current;
             const context = canvas.getContext('2d');
@@ -26,27 +24,23 @@ export const DrawingApp:React.FC = ():JSX.Element => {
         }
     }, []);
 
-    if (!user) {
-        return <Redirect push to="/login" />;
-    }
-
     const startDrawing = ({
         nativeEvent,
-    }: React.MouseEvent<HTMLCanvasElement, MouseEvent>) => {
+    }: React.MouseEvent<HTMLCanvasElement, MouseEvent>):void => {
         const { offsetX, offsetY } = nativeEvent;
     contextRef.current!.beginPath();
     contextRef.current!.moveTo(offsetX, offsetY);
     setIsDrawing(true);
     };
 
-    const finishDrawing = () => {
+    const finishDrawing = ():void => {
     contextRef.current!.closePath();
     setIsDrawing(false);
     };
 
     const draw = ({
         nativeEvent,
-    }: React.MouseEvent<HTMLCanvasElement, MouseEvent>) => {
+    }: React.MouseEvent<HTMLCanvasElement, MouseEvent>):void => {
         if (!isDrawing) {
             return;
         }
@@ -55,21 +49,12 @@ export const DrawingApp:React.FC = ():JSX.Element => {
     contextRef.current!.stroke();
     };
 
-    const saveImage = () => {
+    const saveImage = ():void => {
         const image = canvasRef.current!.toDataURL('image/png');
-        try {
-            firebase
-                .database()
-                .ref()
-                .child('pictures/')
-                .child(`${new Date().getTime()}`)
-                .set(image);
-        } catch (error) {
-            console.log(error);
-        }
+        firebaseService.saveImage(image);
     };
 
-    const undoFn = () => {
+    const undoFn = ():void => {
         if (canvasRef.current) {
             const canvas = canvasRef.current;
             const context = canvas.getContext('2d');
@@ -92,7 +77,7 @@ export const DrawingApp:React.FC = ():JSX.Element => {
                     <SaveIcon className={styles.saveIcon} />
                 </Button>
                 <Button onClick={undoFn} color="secondary">
-        Undo
+                    Undo
                 </Button>
             </div>
         </div>

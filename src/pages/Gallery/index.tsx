@@ -1,27 +1,24 @@
 import React, { useEffect } from 'react';
-
-import { useDispatch, useSelector } from 'react-redux';
+import {createSelectorHook, useDispatch} from 'react-redux';
 import { getImages } from 'redux/actions/imagesActions';
-import { Redirect } from 'react-router-dom';
 import styles from './style.module.css';
+import {RootState} from "interfaces/RootStateType";
 
-export const Gallery = () => {
-    const images = useSelector((state: any) => state.imagesReducer);
-    const user = useSelector((state: any) => state.userStateReducer);
+export const Gallery:React.FC = ():JSX.Element => {
+
+    const useSelector = createSelectorHook<RootState>()
+    const images = useSelector(state => state.imagesReducer);
+
     const dispatch = useDispatch();
 
-    useEffect(() => {
+    useEffect(():void => {
         dispatch(getImages());
-    }, []);
-
-    if (!user) {
-        return <Redirect push to="/login" />;
-    }
+    });
 
     return (
         <div className={styles.galleryContainer}>
-            {images.map((image: string, index: number) => (
-                <img key={index} className={styles.image} src={image} alt="error" />
+            {images.map((image: string) => (
+                <img key={Math.random()} className={styles.image} src={image} alt="error" />
             ))}
         </div>
     );

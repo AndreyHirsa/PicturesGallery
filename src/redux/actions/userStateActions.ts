@@ -1,19 +1,21 @@
-import { UserStateActionsType } from 'interfaces/IUserStateActions';
-
 import {
-    LOG_IN_SUCCESS,
-    LOG_IN,
-    SIGN_OUT,
-} from './constants';
+    ILogIn,
+    ILogInSuccess,
+    UserStateActionsType,
+} from 'interfaces/IUserStateActions';
 
-export const logInSuccess = (user:Record<string, unknown>):UserStateActionsType => ({
+import { LOG_IN_SUCCESS, LOG_IN, SIGN_OUT } from './constants';
+export const logInSuccess = (
+    user: ILogInSuccess['payload']
+): UserStateActionsType => ({
     type: LOG_IN_SUCCESS,
-    payload: {
-        user,
-    },
+    payload: user,
 });
 
-export const logIn = (email: string, password: string):UserStateActionsType => ({
+export const logIn = (
+    email: ILogIn['payload']['email'],
+    password: ILogIn['payload']['password']
+): UserStateActionsType => ({
     type: LOG_IN,
     payload: {
         email,
@@ -21,7 +23,7 @@ export const logIn = (email: string, password: string):UserStateActionsType => (
     },
 });
 
-export const signOut = ():UserStateActionsType => ({
+export const signOut = (): UserStateActionsType => ({
     type: SIGN_OUT,
     payload: null,
 });

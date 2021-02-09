@@ -10,8 +10,8 @@ export const firebaseConfig = {
     appId: '1:24096359356:web:6ea8a883c6e33e5f4521b9',
 };
 
-export const firebaseService={
-    saveImage:(data:string):void=>{
+export const firebaseService = {
+    saveImage: (data: string): void => {
         try {
             firebase
                 .database()
@@ -23,5 +23,5 @@ export const firebaseService={
             console.log(error);
         }
     }
-}
+};
 

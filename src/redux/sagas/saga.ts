@@ -9,15 +9,15 @@ import {
 import { GET_IMAGES, LOG_IN, SIGN_UP } from 'redux/actions/constants';
 import { logInFailure, signUpFailure } from 'redux/actions/errorMessageActions';
 import { logInSuccess } from 'redux/actions/userStateActions';
-import {firebaseConfig} from 'services/firebaseService';
+import { firebaseConfig } from 'services/firebaseService';
 import { putImages } from 'redux/actions/imagesActions';
 import { signUpSuccess } from 'redux/actions/signUpActions';
 import { ISignUp, SignUpActionsType } from 'interfaces/ISignUpActions';
 import { ILogIn, UserStateActionsType } from 'interfaces/IUserStateActions';
 import { ErrorMessageActionsType } from 'interfaces/IErrorMessageActions';
 import { ImagesActionsType } from 'interfaces/IImagesActions';
-import firebase from "firebase";
-import ReduxSagaFirebase from "redux-saga-firebase";
+import firebase from 'firebase';
+import ReduxSagaFirebase from 'redux-saga-firebase';
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const rsf = new ReduxSagaFirebase(firebaseApp);

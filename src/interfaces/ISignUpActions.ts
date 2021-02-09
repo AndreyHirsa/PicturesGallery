@@ -14,12 +14,12 @@ export interface ISignUp {
 
 export interface ISignUpSuccess {
   type: typeof SIGN_UP_SUCCESS;
-  payload: boolean;
+  payload:boolean;
 }
 
 export interface IResetMessageSuccess {
   type: typeof RESET_SUCCESS_MESSAGE;
-  payload: boolean;
+  payload:boolean;
 }
 
 export type SignUpActionsType = ISignUpSuccess | IResetMessageSuccess | ISignUp;

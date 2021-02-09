@@ -1,15 +1,21 @@
 import { SignUpActionsType } from 'interfaces/ISignUpActions';
+import {
+    RESET_SUCCESS_MESSAGE,
+    SIGN_UP_SUCCESS,
+} from 'redux/actions/constants';
 
-export const signUpState= false;
+
+// eslint-disable-next-line
+export let signUpInitialState:true | false = false;
 
 export const signUpReducer = (
-    state = signUpState,
+    state = signUpInitialState,
     action: SignUpActionsType
-): true | false => {
+): typeof signUpInitialState => {
     switch (action.type) {
-    case 'SIGN_UP_SUCCESS':
+    case SIGN_UP_SUCCESS:
         return action.payload;
-    case 'RESET_SUCCESS_MESSAGE':
+    case RESET_SUCCESS_MESSAGE:
         return action.payload;
     default:
         return state;

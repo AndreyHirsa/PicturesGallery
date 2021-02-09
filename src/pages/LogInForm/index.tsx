@@ -1,36 +1,28 @@
 import { Button, TextField } from '@material-ui/core';
 import React, { useState } from 'react';
-import {createSelectorHook, useDispatch, useSelector} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import CloseIcon from '@material-ui/icons/Close';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { logIn } from 'redux/actions/userStateActions';
 import styles from './style.module.css';
-import {RootState} from "interfaces/RootStateType";
+import { useErrorMessageState } from 'redux/selectors/stateSelectors';
 
-export const LogInForm: React.FC = ():JSX.Element => {
-
-    const useSelector = createSelectorHook<RootState>()
-    const user = useSelector(state => state?.userStateReducer);
-    const message = useSelector(state => state.errorMessageReducer);
-
+export const LogInForm: React.FC = (): JSX.Element => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const dispatch = useDispatch();
+    const errorMessage = useErrorMessageState();
 
-    function emailHandler(e: React.ChangeEvent<HTMLInputElement>):void {
+    function emailHandler(e: React.ChangeEvent<HTMLInputElement>): void {
         setEmail(e.target.value);
     }
 
-    function passwordHandler(e: React.ChangeEvent<HTMLInputElement>):void {
+    function passwordHandler(e: React.ChangeEvent<HTMLInputElement>): void {
         setPassword(e.target.value);
     }
 
-    function logInUser():void {
+    function logInUser(): void {
         dispatch(logIn(email, password));
-    }
-
-    if (user) {
-        return <Redirect push to="/" />;
     }
 
     return (
@@ -58,7 +50,7 @@ export const LogInForm: React.FC = ():JSX.Element => {
                     onChange={passwordHandler}
                     type="password"
                 />
-                <span className={styles.message}>{message}</span>
+                <span className={styles.message}>{errorMessage}</span>
                 <Button onClick={logInUser}>Log in</Button>
             </form>
         </div>

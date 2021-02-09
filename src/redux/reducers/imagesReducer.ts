@@ -1,12 +1,12 @@
 import { PUT_IMAGES } from 'redux/actions/constants';
 import { ImagesActionsType } from 'interfaces/IImagesActions';
 
-const imagesState: string[] = [];
+export const imagesInitialState: string[] = [];
 
 export const imagesReducer = (
-    state = imagesState,
+    state = imagesInitialState,
     action: ImagesActionsType,
-):typeof imagesState => {
+):typeof imagesInitialState => {
     switch (action.type) {
     case PUT_IMAGES:
         return action.payload;

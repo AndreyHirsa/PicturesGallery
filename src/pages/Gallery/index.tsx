@@ -1,25 +1,24 @@
 import React, { useEffect } from 'react';
-import {createSelectorHook, useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { getImages } from 'redux/actions/imagesActions';
+import { useImagesState } from 'redux/selectors/stateSelectors';
 import styles from './style.module.css';
-import {RootState} from "interfaces/RootStateType";
 
-export const Gallery:React.FC = ():JSX.Element => {
-
-    const useSelector = createSelectorHook<RootState>()
-    const images = useSelector(state => state.imagesReducer);
+export const Gallery: React.FC = (): JSX.Element => {
 
     const dispatch = useDispatch();
-
-    useEffect(():void => {
+    useEffect((): void => {
         dispatch(getImages());
     });
+    const images = useImagesState();
 
     return (
         <div className={styles.galleryContainer}>
-            {images.map((image: string) => (
-                <img key={Math.random()} className={styles.image} src={image} alt="error" />
-            ))}
+            {images.map(
+                (image: string, index: number): JSX.Element => (
+                    <img key={index} className={styles.image} src={image} alt="error" />
+                )
+            )}
         </div>
     );
 };

@@ -5,12 +5,12 @@ import {
     SIGN_UP_FAILURE,
 } from 'redux/actions/constants';
 
-export const errorMessage:string | undefined= '';
+export const errorMessageInitialState:string | undefined= '';
 
 export function errorMessageReducer(
-    state = errorMessage,
+    state = errorMessageInitialState,
     action: ErrorMessageActionsType,
-):typeof errorMessage{
+):typeof errorMessageInitialState{
     switch (action.type) {
     case SIGN_UP_FAILURE:
         return action.payload;

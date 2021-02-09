@@ -1,24 +1,23 @@
 import React from 'react';
 import { AppBar, Button, Toolbar } from '@material-ui/core';
-import {createSelectorHook, useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { resetErrorMessage } from 'redux/actions/errorMessageActions';
 import { signOut } from 'redux/actions/userStateActions';
-import {RootState} from "interfaces/RootStateType";
+import { useUserState } from 'redux/selectors/stateSelectors';
 
-export const HeaderNavigation:React.FC = (): JSX.Element => {
-
-    const useSelector = createSelectorHook<RootState>()
-    const user = useSelector(state => state?.userStateReducer);
+export const HeaderNavigation: React.FC = (): JSX.Element => {
     const dispatch = useDispatch();
 
-    const signOutFn = ():void => {
+    const signOutFn = (): void => {
         dispatch(signOut());
     };
 
-    const resetMessage = ():void => {
+    const resetMessage = (): void => {
         dispatch(resetErrorMessage());
     };
+
+    const user = useUserState();
 
     return (
         <AppBar position="static">
